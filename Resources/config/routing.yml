@@ -1,0 +1,3 @@
+#namshi_utility_homepage:
+#    pattern:  /utils/{file}
+#    defaults: { _controller: NamshiUtilityBundle:Default:serveFile }
