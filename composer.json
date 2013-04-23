@@ -1,0 +1,18 @@
+{
+    "name": "namshi/utility-bundle",
+    "type": "symfony-bundle",
+    "description": "A bunch of utilities we find pretty useful and use in our web systems.",
+    "keywords": ["symfony2 namshi utility util"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":"Alessandro Nadalin",
+            "email":"alex.nadalin@namshi.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": { "Namshi\\UtilityBundle": "" }
+    },
+    "target-dir": "Namshi/UtilityBundle"
+}
