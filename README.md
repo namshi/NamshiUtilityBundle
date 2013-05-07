@@ -62,8 +62,8 @@ another one.
 ``` php
 <?php
 
-use use Namshi\UtilityBundle\Currency\Converter;
-use use Namshi\UtilityBundle\Currency\Currency;
+use Namshi\UtilityBundle\Currency\Converter;
+use Namshi\UtilityBundle\Currency\Currency;
 use Namshi\UtilityBundle\Exception\CurrencyNotFound;
 
 $conversionRates = array(
