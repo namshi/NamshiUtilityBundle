@@ -9,29 +9,40 @@ use Namshi\UtilityBundle\Exception\CurrencyNotFound;
  */
 class Converter
 {
-    protected $conversionRates = array();
-    
     /**
-     * Constructor.
-     * 
-     * @param array $conversionRates 
+     * @var array
      */
-    public function __construct(array $conversionRates = array())
+    protected $conversionRates = array();
+
+    /**
+     * @var int
+     */
+    protected $roundingPrecision;
+
+    /**
+     * Constructor
+     *
+     * @param array $conversionRates
+     * @param int $roundingPrecision
+     */
+    public function __construct(array $conversionRates = array(), $roundingPrecision = 2)
     {
         $this->setConversionRates($conversionRates);
+        $this->setRoundingPrecision($roundingPrecision);
     }
-    
+
     /**
      * Converts the given $amount from a currency ($from) to another one ($to).
-     * 
-     * @param mixed $amount
-     * @param string $from
-     * @param string $to 
-     * @throws Namshi\UtilityBundle\Exception\CurrencyNotFound
+     * Returns values like 205.00 or 207.25
+     *
+     * @param $amount
+     * @param $from
+     * @param $to
+     * @return string
      */
     public function convert($amount, $from, $to)
-    {        
-        return $amount * $this->getConversionRate($from, $to);
+    {
+        return number_format(round($amount * $this->getConversionRate($from, $to), $this->roundingPrecision), 2, '.', '');
     }
     
     /**
@@ -42,6 +53,16 @@ class Converter
     public function setConversionRates(array $conversionRates = array())
     {
         $this->conversionRates = $conversionRates;
+    }
+
+    /**
+     * Sets the rounding precision
+     *
+     * @param int $roundingPrecision
+     */
+    public function setRoundingPrecision($roundingPrecision)
+    {
+        $this->roundingPrecision = $roundingPrecision;
     }
     
     /**
