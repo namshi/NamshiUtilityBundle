@@ -54,4 +54,11 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals(5, $this->converter->convert(2.5, "A", "b"));
     }
+
+    public function testAConversionRateWithSameCurrencies()
+    {
+        $this->converter->setConversionRates(array('A' => array('B' => 2)));
+        
+        $this->assertEquals(5, $this->converter->convert(5, "A", "A"));
+    }
 }

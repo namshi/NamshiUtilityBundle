@@ -30,16 +30,8 @@ class Converter
      * @throws Namshi\UtilityBundle\Exception\CurrencyNotFound
      */
     public function convert($amount, $from, $to)
-    {
-        if (isset($this->conversionRates[$from]) && isset($this->conversionRates[$from][$to])) {
-            return $amount * $this->conversionRates[$from][$to];
-        }
-        
-        if (isset($this->conversionRates[$from])) {
-            throw new CurrencyNotFound($from);
-        } 
-        
-        throw new CurrencyNotFound($to);
+    {        
+        return $amount * $this->getConversionRate($from, $to);
     }
     
     /**
@@ -50,5 +42,31 @@ class Converter
     public function setConversionRates(array $conversionRates = array())
     {
         $this->conversionRates = $conversionRates;
+    }
+    
+    /**
+     * Gets the conversion rate from 2 currencies.
+     * If currencies are the same, 1 will be returned by default.
+     * 
+     * @param string $from
+     * @param string $to
+     * @return int
+     * @throws CurrencyNotFound 
+     */
+    protected function getConversionRate($from, $to)
+    {
+        if ($from === $to) {
+            return 1;
+        }
+        
+        if (!isset($this->conversionRates[$from])) {
+            throw new CurrencyNotFound($from);
+        }
+        
+        if (!isset($this->conversionRates[$from][$to])) {
+            throw new CurrencyNotFound($to);
+        }
+        
+        return $this->conversionRates[$from][$to];
     }
 }
