@@ -51,3 +51,36 @@ How to restrict access to the file then? Simply use
 the built-in ACL system that you have in Symfony2:
 configure your `security.yml` for the path `^/protected.txt`
 and you're done.
+
+## Currency conversion
+
+Totally unrelated to Symfony2, but included here for (our) conveniency,
+there is a currency converter that accepts conversion rates
+and can be used to easily convert an amount from a currency to
+another one.
+
+``` php
+<?php
+
+use use Namshi\UtilityBundle\Currency\Converter;
+use use Namshi\UtilityBundle\Currency\Currency;
+use Namshi\UtilityBundle\Exception\CurrencyNotFound;
+
+$conversionRates = array(
+  'EUR' => array(
+    'USD' => 1.3,
+  ),
+  'USD' => array(
+    'AED' => 4,
+    'EUR' => 0.7,
+  ),
+);
+
+$converter => new Converter($conversionRates);
+
+try {
+    echo $converter->convert(12, Currency::UNITED_STATES_DOLLAR, Currency::EURO)
+} catch (CurrencyNotFound $e) {
+    echo "Yo boss, can ya provide conversion rates here?";
+}
+```
