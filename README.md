@@ -76,7 +76,7 @@ $conversionRates = array(
   ),
 );
 
-$converter => new Converter($conversionRates);
+$converter = new Converter($conversionRates);
 
 try {
     echo $converter->convert(12, Currency::UNITED_STATES_DOLLAR, Currency::EURO)
