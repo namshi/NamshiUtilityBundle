@@ -17,6 +17,34 @@ Then enable it in the `AppKernel.php`:
 new Namshi\UtilityBundle\NamshiUtilityBundle(),
 ```
 
+## Doctrine CommaSeparatedList type
+
+If you want to persist an array into the
+DB as a list of comma-separated strings (ie.
+to be able to execute [FIND_IN_SET](http://dev.mysql.com/doc/refman/5.0/en/string-functions.html#function_find-in-set))
+you can simply use the `Namshi\UtilityBundle\ORM\Type\CommaSeparatedList`
+type.
+
+Remember to register it inside Symfony2's `config.yml`:
+
+```
+doctrine:
+    dbal:
+        types:
+            comma_separated_list: Namshi\UtilityBundle\ORM\Type\CommaSeparatedList
+```
+
+and then use it on your entities:
+
+``` php
+/**
+ * @var array
+ *
+ * @ORM\Column(name="tags", type="comma_separated_list", nullable=true)
+ */
+protected $tags = array();
+```
+
 ## File serving with authentication
 
 One of the utilities that you can take
