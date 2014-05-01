@@ -31,7 +31,7 @@ class CommaSeparatedList extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return explode(',', $value);
+        return empty($value) ? array() : explode(',', $value);
     }
 
     /**
@@ -39,7 +39,7 @@ class CommaSeparatedList extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return implode(',', $value);
+        return empty($value) ? null : implode(',', $value);
     }
 
     /**
